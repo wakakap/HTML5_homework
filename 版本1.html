@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>分割动画</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<canvas id="myCanvas" width="1300" height="600" style="border:solid">
+    你的浏览器不支持canvas画布元素，请更新浏览器获得演示效果。
+</canvas>
+<script type="text/javascript">
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+
+    var dangong1 = new Image();
+    dangong1.src = "C:/Users/Thinkpad/Desktop/愤怒的小鸟/slingshot1.png";
+    var xiaomai1 = new Image();
+    xiaomai1.src = "C:/Users/Thinkpad/Desktop/愤怒的小鸟/小埋1.png";
+    var dangong2 = new Image();
+    dangong2.src = "C:/Users/Thinkpad/Desktop/愤怒的小鸟/slingshot2.png";//这里影响着覆盖关系
+    var pig = new Image();
+    pig.src = "C:/Users/Thinkpad/Desktop/愤怒的小鸟/愤怒小鸟/images/pig01.png";//一个路径楼别错
+
+    //注：setInterval并不是必须写在image.onload中
+
+    ////////////////////////////////////////////////////////////////////////////////以下发射部分///////////
+    canvas.addEventListener("mousedown", onMouseDown, false);
+    canvas.addEventListener("mousemove", onMouseMove, false);
+    canvas.addEventListener("mouseup", onMouseUp, false);
+
+    var tanshe = function (image, x, y) {
+        this.image = image;
+        this.x = x;
+        this.y = y;
+        this.width = image.width;
+        this.height = image.height;
+    };
+    tanshe.prototype.testPoint = function (x, y) {
+        var betweenX = (x >= this.x) && (x <= this.x + this.width);
+        var betweenY = (y >= this.y) && (y <= this.y + this.height);
+        return betweenX && betweenY;
+    };
+    tanshe.prototype.move = function (dx, dy) {
+        this.x += dx;
+        this.y += dy;
+
+    };
+    tanshe.prototype.draw = function (ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.drawImage(this.image, 0, 0);
+        ctx.restore();
+    };
+    var fish;
+    var isClicked = false;
+    var isClicked2 = false;
+    var mouseX, mouseY, preX, preY;
+    var id= setInterval(function () {
+        context.clearRect(0, 0, 1300, 600);
+        context.drawImage(dangong1,104,315);
+        context.drawImage(pig,1004,315);
+        fish.draw(context);
+        context.drawImage(dangong2,75,315);
+        if(isClicked){
+            context.beginPath();
+            context.moveTo(78,355);
+            context.lineTo(81,358);
+            context.lineTo(mouseX,mouseY);
+            context.lineTo(mouseX+5,mouseY+5);
+            context.closePath();
+            context.fill();
+            context.beginPath();
+            context.moveTo(137,352);
+            context.lineTo(140,355);
+            context.lineTo(mouseX,mouseY);
+            context.lineTo(mouseX+5,mouseY+5);
+            context.closePath();
+            context.fill();
+            context.restore();
+        }
+    }, 1000 / 60);
+    xiaomai1.onload = function () {
+        fish = new tanshe(xiaomai1, x0,y0);
+        id;
+        context.clearRect(1300,600);
+    };
+    function onMouseDown(e) {
+        preX = mouseX = e.pageX - canvas.clientLeft;
+        preY = mouseY = e.pageY - canvas.clientTop;
+        isClicked = fish.testPoint(mouseX, mouseY);
+        isClicked2 = fish.testPoint(mouseX, mouseY);
+    }
+    var x0=78,y0=355;
+    var x01=78,y01=355;
+    function onMouseMove(e) {
+        if (isClicked) {
+            mouseX = e.pageX - canvas.clientLeft;
+            mouseY = e.pageY - canvas.clientTop;
+            fish.move(mouseX - preX, mouseY - preY);
+            preX = mouseX;
+            preY = mouseY;
+            x0=mouseX;
+            y0=mouseY;
+            x01=mouseX;
+            y01=mouseY;
+        }
+    }
+    var biaoji1=0;
+    function onMouseUp(e) {
+        isClicked = false;
+
+        //////////////////////////////////////////////////////////////////////////飞行过程/////////////////////////);
+        var flag2=0;
+        if (biaoji1==0 && isClicked2){
+            clearInterval(id);
+            context.clearRect(0, 0, 1300, 600);
+            var fly = setInterval(function() {
+                context.clearRect(0, 0, 1300, 600);
+                context.save();
+                    x0 += (100-x01)/20;
+                    y0 -= (y01-360)/20;
+                    context.drawImage(dangong1, 104, 315);
+                    context.translate(x0-40, y0-33);
+                    context.drawImage(xiaomai1, 0, 0);
+                    context.restore();
+                    context.drawImage(dangong2, 75, 315);
+
+
+                if(Math.sqrt((x0-1104)*(x0-1104)+(y0-415)*(y0-415))>=90&&flag2==0){
+                    context.drawImage(pig, 1004, 315);
+                }
+                else {
+                    flag2 = 1;
+                }
+
+                if (Math.sqrt((x0-100)*(x0-100)+(y0-360)*(y0-360))<=5){
+                    flag1 = 1;
+                }
+                if (flag1 == 0){
+                    context.beginPath();
+                    context.moveTo(78, 355);
+                    context.lineTo(81, 358);
+                    context.lineTo(x0, y0);
+                    context.lineTo(x0 + 5, y0 + 5);
+                    context.closePath();
+                    context.fill();
+                    context.beginPath();
+                    context.moveTo(137, 352);
+                    context.lineTo(140, 355);
+                    context.lineTo(x0, y0);
+                    context.lineTo(x0 + 5, y0 + 5);
+                    context.closePath();
+                    context.fill();
+                }
+            }, 1000 / 60);
+            biaoji1=1;
+        }
+
+    }
+    ///////////////////////////////////////////////////////////////////////////发射参数//////////////////////////
+    var sina = (y01-360)/Math.sqrt((x01-100)*(x01-100)+(y01-360)*(y01-360));
+    var cons = (x01-100)/Math.sqrt((x01-100)*(x01-100)+(y01-360)*(y01-360));
+
+
+
+
+</script>
+</body>
+</html>

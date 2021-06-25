@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>分割动画</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<canvas id="myCanvas" width="1300" height="650" style="border:solid;position: absolute;z-index: 1">
+    你的浏览器不支持canvas画布元素，请更新浏览器获得演示效果。
+</canvas>
+<script type="text/javascript">
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+    var nikotry = new Image();
+    nikotry.src = "nikotryagain.png";
+    var nike = new Image();
+    nike.src = "矢泽妮可300x.png";
+    var yuyuyu = new Image();
+    yuyuyu.src = "鱼鱼鱼1440x900.jpg";
+    var juren =new Image();
+    juren.src = "进击的巨人1440x900.jpg";
+    var win = new Image();
+    win.src = "win.png";
+    var boom = new Image();
+    boom.src = "remove.png";
+    var seaface = new Image();
+    seaface.src = "水面1024x727.jpg";
+    var sea = new Image();
+    sea.src = "海底1024x768.jpg";
+    var zhongda = new Image();
+    zhongda.src = "珠海中大1280x960.jpg";
+    var tiantang = new Image();
+    tiantang.src = "天堂1024x1024.png";
+    var dangong1 = new Image();
+    dangong1.src = "slingshot1.png";
+    var xiaomai1 = new Image();
+    xiaomai1.src = "小埋00_副本.png";
+    var dangong2 = new Image();
+    dangong2.src = "slingshot2.png";
+    var pig = new Image();
+    pig.src = "pig01.png";
+    var zhangai1 = new Image();
+    zhangai1.src = "desk.png";
+    canvas.addEventListener("mousedown", onMouseDown, false);
+    canvas.addEventListener("mousemove", onMouseMove, false);
+    canvas.addEventListener("mouseup", onMouseUp, false);
+    var tanshe = function (image, x, y) {
+        this.image = image;
+        this.x = x;
+        this.y = y;
+        this.width = image.width;
+        this.height = image.height;
+    };
+    tanshe.prototype.testPoint = function (x, y) {
+        var betweenX = (x >= this.x) && (x <= this.x + this.width);
+        var betweenY = (y >= this.y) && (y <= this.y + this.height);
+        return betweenX && betweenY;
+    };
+    tanshe.prototype.move = function (dx, dy) {
+        this.x += dx;
+        this.y += dy;
+
+    };
+    tanshe.prototype.draw = function (ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.drawImage(this.image, -25, 0);
+        ctx.restore();
+    };
+
+    function onMouseDown(e) {
+        preX = mouseX = e.pageX - canvas.clientLeft;
+        preY = mouseY = e.pageY - canvas.clientTop;
+        isClicked = fish.testPoint(mouseX, mouseY);
+        isClicked2 = fish.testPoint(mouseX, mouseY);//每当鼠标按下就会判断一次，要注意原本的true可能会变成false
+    }
+    function onMouseMove(e) {
+        if (isClicked) {
+            mouseX = e.pageX - canvas.clientLeft;
+            mouseY = e.pageY - canvas.clientTop;
+            fish.move(mouseX - preX, mouseY - preY);
+            preX = mouseX;
+            preY = mouseY;
+            x0 = mouseX;
+            y0 = mouseY;
+            x01 = mouseX;
+            y01 = mouseY;
+        }
+    }
+    function onMouseUp(e) {
+        isClicked = false;
+        flybj=1;
+        biaojixia1=0;
+        fish.x=weizhi1-25;
+        fish.y=weizhi2-5;
+        if (isClicked2)clearInterval(id1);
+    }
+    var g = 900;
+    const weizhi1 = 180;
+    const weizhi2 = 400;
+    //////////////////////////////////////////////////////////////////////关卡1//////////////////////////////////1
+    //////////////////////////////////////////////////////////////////////关卡1//////////////////////////////////1
+    var guanka=1;
+    if(guanka==1) {
+        var xp, yp;
+        xp = 1100;
+        yp = 380;
+        var fish;
+        var isClicked = false;
+        var isClicked2 = false;
+        var mouseX, mouseY, preX, preY;
+        var id1 = setInterval(function () {/////////////////////////////////////////jishiqi  id1/////////////////////
+            context.clearRect(0, 0, 1300, 650);
+            context.drawImage(zhongda, 0, 0, 1280, 960, 0, 0, 1300, 960);
+            context.drawImage(dangong1, weizhi1 + 4, weizhi2 - 35);
+            context.drawImage(pig, xp, yp);
+            context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 150);
+            context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 200);
+            context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 250);
+            context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 300);
+            context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 350);
+            context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 400);
+            context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 450);
+            context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 500);
+            fish.draw(context);
+            context.drawImage(dangong2, weizhi1 - 25, weizhi2 - 35);
+            if (isClicked) {
+                context.beginPath();
+                context.moveTo(weizhi1 - 22, weizhi2 + 5);
+                context.lineTo(weizhi1 - 19, weizhi2 + 8);
+                context.lineTo(mouseX, mouseY);
+                context.lineTo(mouseX + 5, mouseY + 5);
+                context.closePath();
+                context.fill();
+                context.beginPath();
+                context.moveTo(weizhi1 + 37, weizhi2 + 2);
+                context.lineTo(weizhi1 + 40, weizhi2 + 5);
+                context.lineTo(mouseX, mouseY);
+                context.lineTo(mouseX + 5, mouseY + 5);
+                context.closePath();
+                context.fill();
+                context.restore();
+             }
+        }, 1000 / 60);
+        xiaomai1.onload = function () {
+            fish = new tanshe(xiaomai1, x0, y0);
+            id1;
+            context.clearRect(1300, 650);
+        };
+
+
+        var x0 = weizhi1 - 22, y0 = weizhi2 + 5;
+        var x01 = weizhi1 - 22, y01 = weizhi2 + 5;
+        var flag1 = 0;//作为是否达到弹弓中部的判据
+        var flag2 = 0;//打中猪时变为1
+        var t = 0;//1
+        var v0;
+        var tem1, tem2;
+        //1
+        var sina;//角度的正弦
+        var cosa;//角度的余弦
+        var flybj=0;/////////////控制onMouseUp中的一个参数.鼠标提起是变为1确保鼠标抬起后才能触发下面的if
+        var tem3=0;//标记变量，若进入过一次下面计时器，就能一直进入
+        var fly = setInterval (function () {//////////////////////////////////////////jishiqi  fly///////////////////
+            if(tem3==1){
+                flybj=1;isClicked=false;isClicked2=true;
+            }
+            if (flybj==1&&isClicked2&&!isClicked) {
+                tem3=1;
+                context.clearRect(0, 0, 1300, 650);
+                if (flag1 == 0) {
+                    context.save();
+                    x0 += Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6)) * (weizhi1 + 10 - x01) / 2000;
+                    y0 -= Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6)) * (y01 - weizhi2 - 6) / 2000;
+                    context.drawImage(zhongda, 0, 0, 1280, 960, 0, 0, 1300, 960);
+                    context.drawImage(dangong1, weizhi1 + 4, weizhi2 - 35);
+                    context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 150);
+                    context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 200);
+                    context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 250);
+                    context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 300);
+                    context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 350);
+                    context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 400);
+                    context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 450);
+                    context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 500);
+                    context.drawImage(pig, xp, yp);
+                    context.translate(x0 - 40, y0 - 33);
+                    context.drawImage(xiaomai1, 0, 0);
+                    context.restore();
+                    context.drawImage(dangong2, weizhi1 - 25, weizhi2 - 35);
+                    if(guanka==2) {
+                        context.drawImage(win,450,300);
+                    }
+                }
+                else if (flag1 == 1) {
+                    context.save();
+                    v0 = Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6)) * 6;
+                    cosa = (weizhi1 + 10 - x01) / Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6));
+                    sina = (y01 - weizhi2 - 6) / Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6));
+                    y0 = -sina * v0 * t + 0.5 * g * t * t + tem2;
+                    x0 = cosa * v0 * t + tem1;
+                    t += 0.01;
+                    if (y0 <= 800) {
+                        context.drawImage(tiantang,0,0,1024,1000,0,-1000- (y0 - tem2) * 4 / 5,1300,1000);
+                        context.drawImage(zhongda, 0, 0, 1280, 960, 0, 0- (y0 - tem2) * 4 / 5, 1300, 960);
+                        context.drawImage(dangong1, weizhi1 + 4, weizhi2 - 35 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 150 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 200 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 250 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 300 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 350 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 400 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 450 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 500 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(xiaomai1, x0 - 40, y0 - 33 - (y0 - tem2) * 4 / 5);
+                        context.drawImage(dangong2, weizhi1 - 25, weizhi2 - 35 - (y0 - tem2) * 4 / 5);
+                        if(guanka==2){
+                            context.drawImage(boom,xp ,yp - (y0 - tem2) * 4 / 5);
+                            context.drawImage(win,450,300);
+                        }
+                    }
+                    else {
+
+                        context.drawImage(tiantang,0,0,1024,1000,0,-1000,1300,1000);
+                        context.drawImage(zhongda, 0, 0, 1280, 960, 0, 0, 1300, 960);
+                        context.drawImage(dangong1, weizhi1 + 4, weizhi2 - 35);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 150);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 200);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 250);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 300);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 350);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 400);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 450);
+                        context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 500);
+                        context.drawImage(xiaomai1, x0 - 40, y0 - 33);
+                        context.drawImage(dangong2, weizhi1 - 25, weizhi2 - 35);
+                        if(guanka==2) {
+                            context.drawImage(win,450,300);
+                            context.drawImage(boom,xp ,yp );
+                        }
+                    }
+
+                }
+                if (Math.sqrt((x0 - xp) * (x0 - xp) + (y0 - yp-10) * (y0 - yp-10)) >= 60 && flag2 == 0) {//没打中猪
+                    if (y0 <= 800)context.drawImage(pig, xp, yp - (y0 - tem2) * 4 / 5);
+                    else context.drawImage(pig, xp, yp);
+                }
+                else {//打中猪
+                    guanka=2;//进入关卡2的条件
+                    flag2 = 1;
+                }
+                if (Math.sqrt((x0 - weizhi1) * (x0 - weizhi1) + (y0 - weizhi2 - 10) * (y0 - weizhi2 - 10)) <= 20) {//判断是否达到弹弓口中部
+                    flag1 = 1;
+                    tem1 = x0;
+                    tem2 = y0;
+                }
+                if (flag1 == 0) {
+                    context.beginPath();
+                    context.moveTo(weizhi1 - 22, weizhi2 + 5);
+                    context.lineTo(weizhi1 - 19, weizhi2 + 8);
+                    context.lineTo(x0, y0);
+                    context.lineTo(x0 + 5, y0 + 5);
+                    context.closePath();
+                    context.fill();
+                    context.beginPath();
+                    context.moveTo(weizhi1 + 37, weizhi2 + 2);
+                    context.lineTo(weizhi1 + 40, weizhi2 + 5);
+                    context.lineTo(x0, y0);
+                    context.lineTo(x0 + 5, y0 + 5);
+                    context.closePath();
+                    context.fill();
+                }
+            } }, 1000 / 60);
+    }
+    //////////////////////////////////////////////////关卡2/////////////////////////////////////////////////////2
+    //////////////////////////////////////////////////关卡2/////////////////////////////////////////////////////2
+    var xnike=395;ynike=130;
+    var yanshi1=0;//稍稍停留在跳入关卡2
+    var chuandi1=0;
+    var biaojixia1;
+    var tem0=1;
+    var tem4=1;
+    var guanka2 = setInterval(function () {//关卡2的一个整体计时器不断之行当guanka2==2时才打开内部内容
+      if(guanka==2) {
+          yanshi1 += 0.01;
+          if(yanshi1>=1.5) {///延迟一段时间再跳入关卡2
+              clearInterval(fly);
+              context.clearRect(0, -2000, 1300, 3000);//
+              clearInterval(guanka2);
+              xp = 850;
+              yp = 76;
+              if(tem0==1){
+                  isClicked = false;//判断鼠标按下且在指定范围为真，提起为负
+                  isClicked2 = false;//判断鼠标按下且在指定范围为真，提起不会变化
+                  tem0=0;
+              }
+              biaojixia1=1;//控制下面的计时器的开关
+              setInterval(function () {/////////////////////////////////////////jishiqi  /////////////////////
+                  if(!(flybj==1&&isClicked2&&!isClicked)){
+                      context.clearRect(0, 0, 1300, 650);
+                      context.drawImage(sea, 0, 0, 1024, 755, 0, -105, 1300, 760);
+                      context.drawImage(yuyuyu,0,0,1440,900,0,620,1300,800);
+                      context.drawImage(dangong1, weizhi1 + 4, weizhi2 - 35);
+                      context.drawImage(nike,xnike,ynike);
+                      context.drawImage(pig, xp, yp);
+                      context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 150);
+                      context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 200);
+                      context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 250);
+                      context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 300);
+                      context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 350);
+                      context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 400);
+                      context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 450);
+                      context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 500);
+                      fish.draw(context);
+                      context.drawImage(dangong2, weizhi1 - 25, weizhi2 - 35);
+                      if (isClicked) {//判断为鼠标按下的时候并且在指定范围内时启动
+                          context.beginPath();
+                          context.moveTo(weizhi1 - 22, weizhi2 + 5);
+                          context.lineTo(weizhi1 - 19, weizhi2 + 8);
+                          context.lineTo(mouseX, mouseY);
+                          context.lineTo(mouseX + 5, mouseY + 5);
+                          context.closePath();
+                          context.fill();
+                          context.beginPath();
+                          context.moveTo(weizhi1 + 37, weizhi2 + 2);
+                          context.lineTo(weizhi1 + 40, weizhi2 + 5);
+                          context.lineTo(mouseX, mouseY);
+                          context.lineTo(mouseX + 5, mouseY + 5);
+                          context.closePath();
+                          context.fill();
+                          context.restore();
+                          tem4=1;
+                      }}
+              }, 1000 / 60);
+              x0 = weizhi1 - 22; y0 = weizhi2 + 5;
+              x01 = weizhi1 - 22; y01 = weizhi2 + 5;
+              flag1 = 0;//作为是否达到弹弓中部的判据
+              flag2 = 0;//打中猪时变为1
+              biaoji1 = 0;//下面计时器的开关之一，作为关闭此计时器时使用
+              t = 0;//1
+              flybj=0;/////////////控制onMouseUp中的一个参数鼠标提起是变为1确保鼠标抬起后才能触发下面的if
+              tem3=0;//标记变量，若进入过一次下面计时器，就能一直进入
+              g = -900;
+              setInterval (function () {//////////////////////////////////////////jishiqi  fly///////////////////
+                  if(tem4==1){
+                      if(tem3==1){
+                          flybj=1;isClicked=false;isClicked2=true;
+                      }
+                      if (biaoji1 == 0 && flybj==1&&isClicked2&&!isClicked) {//这里的isClicked2确保在指定范围外点击不会使if下面启动
+                      tem3=1;
+                      context.clearRect(0, 0, 1300, 650);
+                      if (flag1 == 0) {
+                          context.save();
+                          x0 += Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6)) * (weizhi1 + 10 - x01) / 2000;
+                          y0 -= Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6)) * (y01 - weizhi2 - 6) / 2000;
+                          if (Math.sqrt((x0 - weizhi1) * (x0 - weizhi1) + (y0 - weizhi2 - 10) * (y0 - weizhi2 - 10)) <= 30) {//判断是否达到弹弓口中部
+                              flag1 = 1;
+                              tem1 = x0;
+                              tem2 = y0;
+                          }
+                          context.drawImage(sea, 0, 0, 1024, 755, 0, -105, 1300, 760);
+                          context.drawImage(yuyuyu,0,0,1440,900,0,620,1300,800);
+                          context.drawImage(yuyuyu,0,0,1440,900,0,1420,1300,800);
+                          context.drawImage(dangong1, weizhi1 + 4, weizhi2 - 35);
+                          context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 150);
+                          context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 200);
+                          context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 250);
+                          context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 300);
+                          context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 350);
+                          context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 400);
+                          context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 450);
+                          context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 500);
+                          context.drawImage(nike,xnike,ynike);
+                          context.drawImage(pig, xp, yp);
+                          context.translate(x0 - 40, y0 - 33);
+                          context.drawImage(xiaomai1,0, 0);
+                          context.restore();
+                          context.drawImage(dangong2, weizhi1 - 25, weizhi2 - 35);
+                          if(guanka==3) {
+                              context.drawImage(win,450,300);
+                          }
+                      }
+                      else if (flag1 == 1) {
+                          context.save();
+                          v0 = Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6)) * 6;
+                          cosa = (weizhi1 + 10 - x01) / Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6));
+                          sina = (y01 - weizhi2 - 6) / Math.sqrt((x01 - weizhi1 - 10) * (x01 - weizhi1 - 10) + (y01 - weizhi2 - 6) * (y01 - weizhi2 - 6));
+                          y0 = -sina * v0 * t + 0.5 * g * t * t + tem2;
+                          x0 = cosa * v0 * t + tem1;
+                          t += 0.01;
+                          if (y0 >= - 500) {
+                              context.clearRect(0, 0, 1300, 650);
+                              context.drawImage(seaface,0,0,1024,690,0,-825- (y0 - tem2) * 4 / 5,1300,720);
+                              context.drawImage(sea, 0, 0, 1024, 755, 0, -105- (y0 - tem2) * 4 / 5, 1300, 760);
+                              context.drawImage(yuyuyu,0,0,1440,900,0,620- (y0 - tem2) * 4 / 5,1300,800);
+                              context.drawImage(yuyuyu,0,0,1440,900,0,1420- (y0 - tem2) * 4 / 5,1300,800);
+                              context.drawImage(dangong1, weizhi1 + 4, weizhi2 - 35 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 150 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 200 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 250 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 300 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 350 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 400 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 450 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 500 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(nike,xnike,ynike - (y0 - tem2) * 4 / 5);
+                              context.drawImage(xiaomai1, x0 - 40, y0 - 33 - (y0 - tem2) * 4 / 5);
+                              context.drawImage(dangong2, weizhi1 - 25, weizhi2 - 35 - (y0 - tem2) * 4 / 5);
+                              if(guanka==3){
+                                  context.drawImage(boom,xp ,yp - (y0 - tem2) * 4 / 5);
+                                  context.drawImage(win,450,300);
+                              }
+                          }
+                          else {
+                              context.clearRect(0, 0, 1300, 650);
+                              context.drawImage(seaface,0,0,1024,690,0,-825,1300,720);
+                              context.drawImage(sea, 0, 0, 1024, 755, 0, -105, 1300, 760);
+                              context.drawImage(yuyuyu,0,0,1440,900,0,620,1300,800);
+                              context.drawImage(yuyuyu,0,0,1440,900,0,1420,1300,800);
+                              context.drawImage(dangong1, weizhi1 + 4, weizhi2 - 35);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 150);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 200);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 250);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 300);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 350);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 400);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 450);
+                              context.drawImage(zhangai1, weizhi1 - 50, weizhi2 + 500);
+                              context.drawImage(nike,xnike,ynike);
+                              context.drawImage(xiaomai1, x0 - 40, y0 - 33);
+                              context.drawImage(dangong2, weizhi1 - 25, weizhi2 - 35);
+                              tem4 = 0;
+                              tem3 = 0;
+                              flybj = 1;
+                              isClicked2 = true;
+                              isClicked = false;
+                              x0 = weizhi1 - 22; y0 = weizhi2 + 5;
+                              x01 = weizhi1 - 22; y01 = weizhi2 + 5;
+                              flag1 = 0;//作为是否达到弹弓中部的判据
+                              flag2 = 0;//打中猪时变为1
+                              biaoji1 = 0;//下面计时器的开关之一，作为关闭此计时器时使用
+                              if(guanka!=3)context.drawImage(nikotry,xnike,ynike+320);
+                              t = 0;//1
+                              if(guanka==3) {
+                                  context.drawImage(win,450,300);
+                                  context.drawImage(boom,xp ,yp );
+                              }
+                          }
+                      }
+                          if (Math.sqrt((x0 - xp) * (x0 - xp) + (y0 - yp-10) * (y0 - yp-10)) >= 60 && flag2 == 0) {//没打到猪
+                              if (y0 >= - 500&&flag1==1)context.drawImage(pig, xp, yp- (y0 - tem2) * 4 / 5 );
+                              else context.drawImage(pig, xp, yp);
+                          }
+                          else {//打中猪
+                              guanka=3;//进入关卡3的条件
+                              flag2 = 1;
+                          }
+                          if (flag1 == 0) {
+                              context.beginPath();
+                              context.moveTo(weizhi1 - 22, weizhi2 + 5);
+                              context.lineTo(weizhi1 - 19, weizhi2 + 8);
+                              context.lineTo(x0, y0);
+                              context.lineTo(x0 + 5, y0 + 5);
+                              context.closePath();
+                              context.fill();
+                              context.beginPath();
+                              context.moveTo(weizhi1 + 37, weizhi2 + 2);
+                              context.lineTo(weizhi1 + 40, weizhi2 + 5);
+                              context.lineTo(x0, y0);
+                              context.lineTo(x0 + 5, y0 + 5);
+                              context.closePath();
+                              context.fill();
+                          }
+                      if(y0>ynike&&y0<ynike+295&&x0>xnike&&x0<xnike+295){//////////////////////打到矢泽妮可
+                          tem4 = 0;
+                          tem3 = 0;
+                          flybj = 1;
+                          isClicked2 = true;
+                          isClicked = false;
+                          x0 = weizhi1 - 22; y0 = weizhi2 + 5;
+                          x01 = weizhi1 - 22; y01 = weizhi2 + 5;
+                          flag1 = 0;//作为是否达到弹弓中部的判据
+                          flag2 = 0;//打中猪时变为1
+                          biaoji1 = 0;//下面计时器的开关之一，作为关闭此计时器时使用
+                          t = 0;//1
+                          context.drawImage(nikotry,xnike-350,ynike - (y0 - tem2) * 4 / 5);
+                      }
+                  } }}, 1000 / 60);
+          }
+
+          }
+    }, 1000 / 60);
+
+
+</script>
+</body>
+</html>
